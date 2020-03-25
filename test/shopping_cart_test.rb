@@ -102,4 +102,18 @@ class ShoppingCartTest < Minitest::Test
 
     assert_equal [tissue_paper, chicken, toilet_paper, apples], cart.sorted_products_by_quantity
   end
+
+  def test_it_can_return_product_breakdown
+    cart = ShoppingCart.new("King Soopers", "30items")
+    toilet_paper = Product.new(:paper, 'toilet paper', 3.70, '10')
+    tissue_paper = Product.new(:paper, 'tissue paper', 1.25, '1')
+    apples = Product.new(:produce, 'apples', 0.99, '20')
+    chicken = Product.new(:meat, 'chicken', 4.50, '2')
+    cart.add_product(toilet_paper)
+    cart.add_product(tissue_paper)
+    cart.add_product(apples)
+    cart.add_product(chicken)
+
+    assert_equal cart.product_breakdown, {:paper => [toilet_paper, tissue_paper], :meat => [chicken], :produce => [apples]}
+  end
 end
