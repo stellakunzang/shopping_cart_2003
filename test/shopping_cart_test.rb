@@ -52,7 +52,7 @@ class ShoppingCartTest < Minitest::Test
     cart.add_product(product3)
 
     assert_equal false, cart.is_full?
-    
+
     product4 = Product.new(:produce, 'apples', 0.99, '20')
     cart.add_product(product4)
 
@@ -102,7 +102,7 @@ class ShoppingCartTest < Minitest::Test
     cart.add_product(apples)
     cart.add_product(chicken)
 
-    assert_equal [tissue_paper, chicken, toilet_paper, apples], cart.sorted_products_by_quantity
+    assert_equal [apples, toilet_paper, chicken, tissue_paper], cart.sorted_products_by_quantity
   end
 
   def test_it_can_return_product_breakdown
