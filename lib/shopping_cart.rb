@@ -39,4 +39,8 @@ class ShoppingCart
     return details
      #returns a hash with name and capacity as keys and strings as values
   end
+
+  def percentage_occupied
+    ((total_number_of_products / capacity.to_f) * 100).round(2)
+  end
 end
