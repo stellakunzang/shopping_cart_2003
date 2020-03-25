@@ -45,6 +45,4 @@ class ProductTest < Minitest::Test
     assert_equal 30, product.quantity
     assert_equal true, product.is_hoarded?
   end
-
-
 end
