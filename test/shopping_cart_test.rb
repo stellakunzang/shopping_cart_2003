@@ -16,7 +16,7 @@ class ShoppingCartTest < Minitest::Test
     cart = ShoppingCart.new("King Soopers", "30items")
 
     assert_equal 'King Soopers', cart.name
-    assert_equal '30', cart.capacity
+    assert_equal 30, cart.capacity
     assert_equal [], cart.products
   end
 
@@ -71,12 +71,13 @@ class ShoppingCartTest < Minitest::Test
     cart.add_product(product4)
 
     assert_equal [product1, product3], cart.products_by_category(:paper)
+    assert_equal [product2], cart.products_by_category(:meat)
   end
 
   def test_it_can_return_cart_details
     cart = ShoppingCart.new("King Soopers", "30items")
 
-    assert_equal cart.details, {:name=> "King Soopers", :capacity=> 30}
+    assert_equal ({:name=> "King Soopers", :capacity=> 30}), cart.details
   end
 
   def test_it_can_calculate_percentage_occupied
@@ -107,15 +108,15 @@ class ShoppingCartTest < Minitest::Test
 
   def test_it_can_return_product_breakdown
     cart = ShoppingCart.new("King Soopers", "30items")
-    toilet_paper = Product.new(:paper, 'toilet paper', 3.70, '10')
-    tissue_paper = Product.new(:paper, 'tissue paper', 1.25, '1')
-    apples = Product.new(:produce, 'apples', 0.99, '20')
-    chicken = Product.new(:meat, 'chicken', 4.50, '2')
-    cart.add_product(toilet_paper)
-    cart.add_product(tissue_paper)
-    cart.add_product(apples)
-    cart.add_product(chicken)
+    product1 = Product.new(:paper, 'toilet paper', 3.70, '10')
+    product2 = Product.new(:paper, 'tissue paper', 1.25, '1')
+    product3 = Product.new(:produce, 'apples', 0.99, '20')
+    product4 = Product.new(:meat, 'chicken', 4.50, '2')
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+    cart.add_product(product4)
 
-    assert_equal cart.product_breakdown, {:paper => [toilet_paper, tissue_paper], :meat => [chicken], :produce => [apples]}
+    assert_equal cart.product_breakdown, {:paper => [product1, product2], :meat => [product4], :produce => [product3]}
   end
 end
