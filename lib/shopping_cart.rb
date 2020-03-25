@@ -45,7 +45,7 @@ class ShoppingCart
 
   def sorted_products_by_quantity
     sorted_products = @products.sort_by { |product| product.quantity.to_i }
-    sorted_products
+    sorted_products.reverse
   end
 
   def product_breakdown
