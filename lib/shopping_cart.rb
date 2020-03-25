@@ -27,11 +27,16 @@ class ShoppingCart
     end
   end
 
-  def products_by_category
-
+  def products_by_category(category)
+    products_by_category = products.group_by { |product| product.category }
+    products_by_category[category]
   end
 
   def details
-
+    details = {}
+    details[:name] = name
+    details[:capacity] = capacity.to_i
+    return details
+     #returns a hash with name and capacity as keys and strings as values
   end
 end
