@@ -3,9 +3,8 @@ class ShoppingCart
 
   def initialize(name, capacity)
     @name = name
-    @capacity = capacity.delete('items')
+    @capacity = capacity.delete('items').to_i
     @products = []
-    @total_number_of_products = 0
   end
 
   def add_product(product)
@@ -13,30 +12,35 @@ class ShoppingCart
   end
 
   def total_number_of_products
-    @products.each do |product|
-      @total_number_of_products += product.quantity.to_i
+    products.sum do |product|
+      product.quantity
     end
-    @total_number_of_products
+    # total = 0
+    # @products.each do |product|
+    #   total += product.quantity
+    # end
   end
 
   def is_full?
-    if total_number_of_products >= @capacity.to_i
-      true
-    else
-      false
-    end
+    total_number_of_products >= @capacity
+    # if total_number_of_products >= @capacity
+    #   true
+    # else
+    #   false
+    # end
   end
 
   def products_by_category(category)
-    products_by_category = products.group_by { |product| product.category }
-    products_by_category[category]
+    @products.find_all {|product| product.category == category }
+    # products_by_category = products.group_by { |product| product.category }
+    # products_by_category[category]
   end
 
   def details
     details = {}
     details[:name] = name
-    details[:capacity] = capacity.to_i
-    return details
+    details[:capacity] = capacity
+    details
   end
 
   def percentage_occupied
@@ -44,8 +48,10 @@ class ShoppingCart
   end
 
   def sorted_products_by_quantity
-    sorted_products = @products.sort_by { |product| product.quantity.to_i }
-    sorted_products.reverse
+    @products.sort_by { |product| product.quantity }.reverse
+    # sorted_products = @products.sort_by { |product| product.quantity }
+    # sorted_products.reverse
+
   end
 
   def product_breakdown
