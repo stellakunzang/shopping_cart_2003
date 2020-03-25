@@ -37,7 +37,6 @@ class ShoppingCart
     details[:name] = name
     details[:capacity] = capacity.to_i
     return details
-     #returns a hash with name and capacity as keys and strings as values
   end
 
   def percentage_occupied
