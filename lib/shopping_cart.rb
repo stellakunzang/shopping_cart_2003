@@ -50,9 +50,9 @@ class ShoppingCart
 
   def product_breakdown
     product_breakdown = {}
-      @products.each do |product|
-        product_breakdown[product.category] = products_by_category(product.category)
-      end
+    @products.each do |product|
+      product_breakdown[product.category] = products_by_category(product.category)
+    end
     product_breakdown
   end
 end
